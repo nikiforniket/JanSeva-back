@@ -1,0 +1,2 @@
+from juser.forms.JanSevaUserChangeForm import JanSevaUserChangeForm
+from juser.forms.JanSevaUserCreationForm import JanSevaUserCreationForm

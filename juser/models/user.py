@@ -74,11 +74,11 @@ class JanSevaUser(AbstractUser, PermissionsMixin):
         verbose_name="last logged in at", null=True, blank=True
     )
 
-    objects = EUserManager()
+    objects = JUserManager()
 
     EMAIL_FIELD = "phone_number"
     USERNAME_FIELD = "phone_number"
-    REQUIRED_FIELDS = ["full_name", "phone_number"]
+    REQUIRED_FIELDS = ["full_name",]
 
     def __str__(self):
         return f"{self.full_name} -> {self.email}"

@@ -4,14 +4,13 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 from common.models import TimestampedMetaModelMixin
-from location.models import Booth, LocalBody, Constituency
 from juser.choices import ProfileTypeChoices, ProfileTypeDocsChoices
 
 
 User = get_user_model()
 
 
-class ElectProUserProfile(TimestampedMetaModelMixin):
+class JanSevaUserProfile(TimestampedMetaModelMixin):
 
     user = models.OneToOneField(
         User, related_name="profile", on_delete=models.CASCADE, null=True, blank=True
@@ -57,10 +56,10 @@ class ElectProUserProfile(TimestampedMetaModelMixin):
         verbose_name_plural = "ElectProUser Profiles"
 
 
-class ElectProUserProfileDoc(TimestampedMetaModelMixin):
+class JanSevaUserProfileDoc(TimestampedMetaModelMixin):
 
     profile = models.ForeignKey(
-        ElectProUserProfile, related_name="docs", on_delete=models.CASCADE
+        JanSevaUserProfile, related_name="docs", on_delete=models.CASCADE
     )
     file = models.FileField(upload_to="user/profile/docs")
     doc_type = models.CharField(choices=ProfileTypeDocsChoices.choices, max_length=5)

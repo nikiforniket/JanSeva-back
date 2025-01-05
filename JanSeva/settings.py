@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+
+J_APPS = ["juser", "location", "feed"]
+
+THIRD_PARTY_APPS = ["rest_framework", "rest_framework_simplejwt", "django_extensions"]
+
+INSTALLED_APPS = DJANGO_APPS + J_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -79,7 +85,6 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'janseva',
         'USER': 'postgres',
-        'HOST': '192.168.29.131',
         'PASSWORD': 'postgres'
     }
 }
@@ -126,3 +131,12 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# User Model
+AUTH_USER_MODEL = "juser.JanSevaUser"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
