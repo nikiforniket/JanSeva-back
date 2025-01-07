@@ -11,3 +11,8 @@ class JanSevaTextChoices(models.TextChoices):
             return cls(value).label
         except ValueError:
             return None
+
+
+class ElectionTypeChoices(models.TextChoices):
+    LOKSHABHA = "LS", "Lok Sabha"
+    VIDHANSABHA = "VS", "Vidhan Sabha"

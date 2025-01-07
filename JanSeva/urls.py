@@ -18,6 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from juser.urls import juser_urls
 urlpatterns = [
     path("admin/", admin.site.urls),
-]
+] + juser_urls
