@@ -141,7 +141,7 @@ class ListProfileSerializer(serializers.ModelSerializer):
             "photo",
             "booth_name",
             "local_body_name",
-            "constituency_name"
+            "constituency_name",
         )
 
 

@@ -6,10 +6,13 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from juser.models import ElectProUserProfile
-from juser.serializers.user import (RegisterUserSerializer, UpdateProfileSerializer,
-                                    DetailProfileSerializer, ListProfileSerializer)
+from juser.serializers.user import (
+    RegisterUserSerializer,
+    UpdateProfileSerializer,
+    DetailProfileSerializer,
+    ListProfileSerializer,
+)
 from juser.pagination import UserPagination
-
 
 
 class UserRegisterView(generics.CreateAPIView):
@@ -46,18 +49,32 @@ class UserRegisterView(generics.CreateAPIView):
 
 
 class UserListView(generics.ListAPIView):
-    permission_classes = [IsAuthenticated,]
-    authentication_classes = [TokenAuthentication,]
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    authentication_classes = [
+        TokenAuthentication,
+    ]
     serializer_class = ListProfileSerializer
     pagination_class = UserPagination
 
     def get_queryset(self):
-        return ElectProUserProfile.objects.annotate(booth_name=F("booth__name"),
-                   local_body_name=F("local_body__name"),
-                   constituency_name=F("constituency__name")).values(
-            "full_name", "email", "phone_number",
-            "age", "photo", "booth", "local_body", "constituency",
-            "booth_name", "local_body_name", "constituency_name"
+        return ElectProUserProfile.objects.annotate(
+            booth_name=F("booth__name"),
+            local_body_name=F("local_body__name"),
+            constituency_name=F("constituency__name"),
+        ).values(
+            "full_name",
+            "email",
+            "phone_number",
+            "age",
+            "photo",
+            "booth",
+            "local_body",
+            "constituency",
+            "booth_name",
+            "local_body_name",
+            "constituency_name",
         )
 
     def filter_queryset(self, queryset):
@@ -76,14 +93,24 @@ class UserListView(generics.ListAPIView):
 
 
 class UserDetailView(generics.RetrieveAPIView):
-    permission_classes = [IsAuthenticated,]
-    authentication_classes = [TokenAuthentication,]
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    authentication_classes = [
+        TokenAuthentication,
+    ]
     serializer_class = DetailProfileSerializer
 
     def get_queryset(self):
         ElectProUserProfile.objects.values(
-            "full_name", "email", "phone_number",
-            "age", "photo", "booth", "local_body", "constituency"
+            "full_name",
+            "email",
+            "phone_number",
+            "age",
+            "photo",
+            "booth",
+            "local_body",
+            "constituency",
         ).prefetch_related("docs")
 
     def retrieve(self, request, *args, **kwargs):
@@ -92,8 +119,12 @@ class UserDetailView(generics.RetrieveAPIView):
 
 
 class UserUpdateView(generics.RetrieveUpdateAPIView):
-    permission_classes = [IsAuthenticated,]
-    authentication_classes = [TokenAuthentication,]
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    authentication_classes = [
+        TokenAuthentication,
+    ]
     serializer_class = UpdateProfileSerializer
 
     def update(self, request, *args, **kwargs):

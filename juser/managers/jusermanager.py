@@ -3,6 +3,7 @@
 from django.contrib.auth.models import BaseUserManager
 from django.core.exceptions import ValidationError
 
+
 class JUserManager(BaseUserManager):
     """User manager for users of JanSeva application"""
 

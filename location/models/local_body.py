@@ -14,12 +14,12 @@ class LocalBody(TimestampedMetaModelMixin):
     local_body_type = models.CharField(
         max_length=12, choices=LocalBodyTypeChoices.choices
     )
-    constituency = models.ForeignKey(
+    block = models.ForeignKey(
         Block, related_name="local_bodies", on_delete=models.DO_NOTHING
     )
 
     def __str__(self):
-        return f"{self.name} | {self.constituency}"
+        return f"{self.name} | {self.block}"
 
     class Meta:
         verbose_name = "Local Body"

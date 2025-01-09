@@ -20,7 +20,9 @@ class LoginView(APIView):
         try:
             serializer = LoginSerializer(data=request.data)
             if serializer.is_valid():
-                user = get_object_or_404(User, phone_number=request.data["phone_number"])
+                user = get_object_or_404(
+                    User, phone_number=request.data["phone_number"]
+                )
                 rf = RefreshToken.for_user(user)
                 return Response(
                     {

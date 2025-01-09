@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-h24k*q&kig%c+zd5-s(5mx&j=psqpg#$=(dh6(#%+o^a1*jve1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['physically-calm-hermit.ngrok-free.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ["physically-calm-hermit.ngrok-free.app", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -39,15 +39,16 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-J_APPS = ["juser", "location", "feed"]
+J_APPS = ["juser", "location", "feed", "civic", "report", "news"]
 
-THIRD_PARTY_APPS = ["rest_framework", "rest_framework_simplejwt", "django_extensions"]
+THIRD_PARTY_APPS = ["rest_framework", "rest_framework_simplejwt", "corsheaders", "django_extensions"]
 
 INSTALLED_APPS = DJANGO_APPS + J_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -60,8 +61,7 @@ ROOT_URLCONF = "JanSeva.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'templates']
-        ,
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -81,14 +81,13 @@ WSGI_APPLICATION = "JanSeva.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'janseva',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres'
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "janseva",
+        "USER": "postgres",
+        "PASSWORD": "postgres",
     }
 }
-
 
 
 # Password validation
@@ -140,3 +139,13 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     )
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+from corsheaders.defaults import default_headers
+
+CORS_ALLOW_HEADERS = (
+    *default_headers,
+    "session",
+    "source",
+)

@@ -78,7 +78,9 @@ class JanSevaUser(AbstractUser, PermissionsMixin):
 
     EMAIL_FIELD = "phone_number"
     USERNAME_FIELD = "phone_number"
-    REQUIRED_FIELDS = ["full_name",]
+    REQUIRED_FIELDS = [
+        "full_name",
+    ]
 
     def __str__(self):
         return f"{self.full_name} -> {self.email}"
