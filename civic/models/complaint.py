@@ -32,5 +32,10 @@ class Complaint(TimestampedMetaModelMixin):
     def __str__(self):
         return f"{self.user} | {self.department} | {self.category}"
 
+    class Meta:
+        verbose_name = "Complaint"
+        verbose_name_plural = "Complaints"
+        ordering = ["-created_at"]
+
 
 

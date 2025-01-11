@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib.auth import get_user_model
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 
 from rest_framework import status
@@ -40,8 +41,13 @@ class LoginView(APIView):
                     },
                     status=status.HTTP_400_BAD_REQUEST,
                 )
+        except Http404 as e:
+            return Response(
+                {"message": f"{e.__class__.__name__} : {e}", "error_code": 4001},
+                status=status.HTTP_404_NOT_FOUND,
+            )
         except Exception as e:
             return Response(
-                {"message": f"{e.__class__.__name__} : {e}", "error_code": 1001},
+                {"message": f"{e.__class__.__name__} : {e}", "error_code": 5001},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )

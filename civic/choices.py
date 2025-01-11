@@ -9,3 +9,11 @@ class ComplaintStatusChoices(JanSevaTextChoices):
     REPORTED = "reported", "Reported"
     REPORT_ACKNOWLEDGED = "report_acknowledged", "Report Acknowledged"
     RESOLVED = "resolved", "Resolved"
+
+
+class GeoLocationComplaintChoices(JanSevaTextChoices):
+    POOT_HOLE = "poot_hole", "Poot Hole"
+    STREET_LIGHT = "street_light", "Street Light"
+    GARBAGE = "garbage", "Garbage"
+    DRAINAGE = "drainage", "Drainage"
+    PIPE_LEAK = "pipe_leak", "Pipe Leak"
