@@ -13,6 +13,9 @@ class DepartmentSelectSerializer(serializers.ModelSerializer):
         fields = ("id", "name")
 
 
+class DepartmentListSerializer(DepartmentSelectSerializer): ...
+
+
 class DepartmentSerializer(serializers.ModelSerializer):
 
     class Meta:

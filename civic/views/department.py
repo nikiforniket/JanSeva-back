@@ -6,9 +6,15 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from common.pagination import ListPagination, SelectPagination
 from civic.models import Department
-from civic.serializers import DepartmentSerializer, DepartmentSelectSerializer, DepartmentDetailSerializer, \
-    DepartmentUpdateSerializer
+from civic.serializers import (
+    DepartmentSerializer,
+    DepartmentSelectSerializer,
+    DepartmentDetailSerializer,
+    DepartmentUpdateSerializer,
+    DepartmentListSerializer,
+)
 
 
 class DepartmentRegisterView(generics.CreateAPIView):
@@ -45,20 +51,47 @@ class DepartmentRegisterView(generics.CreateAPIView):
 
 
 class DepartmentSelectView(generics.ListAPIView):
-    permission_classes = [IsAuthenticated,]
-    authentication_classes = [TokenAuthentication,]
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    authentication_classes = [
+        TokenAuthentication,
+    ]
     serializer_class = DepartmentSelectSerializer
+    pagination_class = SelectPagination
 
     def get_queryset(self):
         return Department.objects.filter(is_deleted=False)
 
 
-class DepartmentUpdateDetailView(generics.RetrieveUpdateAPIView):
-    permission_classes = [IsAuthenticated,]
-    authentication_classes = [TokenAuthentication,]
+class DepartmentListView(generics.ListAPIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    authentication_classes = [
+        TokenAuthentication,
+    ]
+    serializer_class = DepartmentListSerializer
+    pagination_class = ListPagination
 
     def get_queryset(self):
-        return Department.objects.filter(is_deleted=False).prefetch_related("categories")
+        return Department.objects.filter(is_deleted=False).prefetch_related(
+            "categories"
+        )
+
+
+class DepartmentUpdateDetailView(generics.RetrieveUpdateAPIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    authentication_classes = [
+        TokenAuthentication,
+    ]
+
+    def get_queryset(self):
+        return Department.objects.filter(is_deleted=False).prefetch_related(
+            "categories"
+        )
 
     def get_serializer_class(self):
         if self.request.method == "GET":
