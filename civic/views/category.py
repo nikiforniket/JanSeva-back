@@ -2,7 +2,6 @@
 
 
 from rest_framework import generics, status
-from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -19,9 +18,6 @@ class CategoryRegisterView(generics.CreateAPIView):
     permission_classes = [
         IsAuthenticated,
     ]
-    authentication_classes = [
-        TokenAuthentication,
-    ]
     serializer_class = CategorySerializer
 
     def create(self, request, *args, **kwargs):
@@ -37,13 +33,18 @@ class CategoryRegisterView(generics.CreateAPIView):
                 return Response(
                     {
                         "message": "Please provide correct values for category registration.",
-                        "error": serializer.errors,
+                        "errors": serializer.errors,
+                        "error_code": 3003,
                     },
                     status=status.HTTP_400_BAD_REQUEST,
                 )
         except Exception as e:
             return Response(
-                {"message": f"{e.__class__.__name__} : {e}", "error_code": 2002},
+                {
+                    "message": f"{e.__class__.__name__}",
+                    "errors": [f"{e}"],
+                    "error_code": 3002,
+                },
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -51,9 +52,6 @@ class CategoryRegisterView(generics.CreateAPIView):
 class CategoryUpdateView(generics.UpdateAPIView):
     permission_classes = [
         IsAuthenticated,
-    ]
-    authentication_classes = [
-        TokenAuthentication,
     ]
     serializer_class = CategoryUpdateSerializer
 
@@ -75,12 +73,13 @@ class CategoryUpdateView(generics.UpdateAPIView):
                     {
                         "message": "Please provide correct values for category update.",
                         "error": serializer.errors,
+                        "error_code": 3003,
                     },
                     status=status.HTTP_400_BAD_REQUEST,
                 )
         except Exception as e:
             return Response(
-                {"message": f"{e.__class__.__name__} : {e}", "error_code": 2002},
+                {"message": f"{e.__class__.__name__} : {e}", "error_code": 3002},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -88,9 +87,6 @@ class CategoryUpdateView(generics.UpdateAPIView):
 class CategorySelectView(generics.ListAPIView):
     permission_classes = [
         IsAuthenticated,
-    ]
-    authentication_classes = [
-        TokenAuthentication,
     ]
     serializer_class = CategorySelectSerializer
     pagination_class = SelectPagination

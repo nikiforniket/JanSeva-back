@@ -9,3 +9,8 @@ from civic.serializers.department import DepartmentListSerializer
 from civic.serializers.category import CategorySerializer
 from civic.serializers.category import CategorySelectSerializer
 from civic.serializers.category import CategoryUpdateSerializer
+
+# Complaint serializers
+from civic.serializers.complaint import ComplaintRegisterSerializer
+from civic.serializers.complaint import ComplaintListSerializer
+from civic.serializers.complaint import ComplaintDetailSerializer

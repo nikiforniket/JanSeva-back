@@ -10,7 +10,7 @@ class DepartmentSelectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Department
-        fields = ("id", "name")
+        fields = ("id", "name", "created_at", "updated_at")
 
 
 class DepartmentListSerializer(DepartmentSelectSerializer): ...
@@ -29,7 +29,7 @@ class DepartmentDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Department
-        fields = ("id", "name", "categories")
+        fields = ("id", "name", "categories", "created_at", "updated_at")
         read_only_fields = ("id",)
 
 

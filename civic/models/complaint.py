@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import uuid
+
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -14,6 +16,8 @@ User = get_user_model()
 
 
 class Complaint(TimestampedMetaModelMixin):
+
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="complaints")
     department = models.ForeignKey(
         Department, on_delete=models.DO_NOTHING, related_name="complaints"

@@ -2,7 +2,6 @@
 
 
 from rest_framework import generics, status
-from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -21,9 +20,6 @@ class DepartmentRegisterView(generics.CreateAPIView):
     permission_classes = [
         IsAuthenticated,
     ]
-    authentication_classes = [
-        TokenAuthentication,
-    ]
     serializer_class = DepartmentSerializer
 
     def create(self, request, *args, **kwargs):
@@ -39,13 +35,18 @@ class DepartmentRegisterView(generics.CreateAPIView):
                 return Response(
                     {
                         "message": "Please provide correct values for department registration.",
-                        "error": serializer.errors,
+                        "errors": serializer.errors,
+                        "error_code": 2003,
                     },
                     status=status.HTTP_400_BAD_REQUEST,
                 )
         except Exception as e:
             return Response(
-                {"message": f"{e.__class__.__name__} : {e}", "error_code": 2002},
+                {
+                    "message": f"{e.__class__.__name__}",
+                    "errors": [f"{e}"],
+                    "error_code": 2002,
+                },
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -53,9 +54,6 @@ class DepartmentRegisterView(generics.CreateAPIView):
 class DepartmentSelectView(generics.ListAPIView):
     permission_classes = [
         IsAuthenticated,
-    ]
-    authentication_classes = [
-        TokenAuthentication,
     ]
     serializer_class = DepartmentSelectSerializer
     pagination_class = SelectPagination
@@ -67,9 +65,6 @@ class DepartmentSelectView(generics.ListAPIView):
 class DepartmentListView(generics.ListAPIView):
     permission_classes = [
         IsAuthenticated,
-    ]
-    authentication_classes = [
-        TokenAuthentication,
     ]
     serializer_class = DepartmentListSerializer
     pagination_class = ListPagination
@@ -83,9 +78,6 @@ class DepartmentListView(generics.ListAPIView):
 class DepartmentUpdateDetailView(generics.RetrieveUpdateAPIView):
     permission_classes = [
         IsAuthenticated,
-    ]
-    authentication_classes = [
-        TokenAuthentication,
     ]
 
     def get_queryset(self):
