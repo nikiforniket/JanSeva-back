@@ -13,6 +13,9 @@ from civic.views import (
     ComplaintRegisterView,
     ComplaintListView,
     ComplaintDetailView,
+    DemandLetterRegisterView,
+    DemandLetterListView,
+    DemandLetterDetailView
 )
 
 
@@ -48,5 +51,20 @@ civic_urlpatterns = [
         "complaints/<uuid:uuid>/",
         ComplaintDetailView.as_view(),
         name="complaint-detail",
+    ),
+    path(
+        "demand-letters/register/",
+        DemandLetterRegisterView.as_view(),
+        name="demand-letter-register",
+    ),
+    path(
+        "demand-letters/",
+        DemandLetterListView.as_view(),
+        name="demand-letter-list",
+    ),
+    path(
+        "demand-letters/<uuid:uuid>/",
+        DemandLetterDetailView.as_view(),
+        name="demand-letter-detail",
     ),
 ]

@@ -14,3 +14,8 @@ from civic.serializers.category import CategoryUpdateSerializer
 from civic.serializers.complaint import ComplaintRegisterSerializer
 from civic.serializers.complaint import ComplaintListSerializer
 from civic.serializers.complaint import ComplaintDetailSerializer
+
+# Demand letter serializers
+from civic.serializers.demand_letter import DemandLetterRegisterSerializer
+from civic.serializers.demand_letter import DemandLetterListSerializer
+from civic.serializers.demand_letter import DemandLetterDetailSerializer

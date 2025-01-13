@@ -16,7 +16,15 @@ class DemandLetterRegisterSerializer(serializers.ModelSerializer):
 class DemandLetterListSerializer(serializers.Serializer):
     uuid = serializers.UUIDField()
     full_name = serializers.CharField()
+    phone_number = serializers.CharField()
     status = serializers.CharField()
     subject = serializers.CharField()
     created_at = serializers.DateTimeField()
     updated_at = serializers.DateTimeField()
+
+
+class DemandLetterDetailSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = DemandLetter
+        exclude = ("is_deleted",)

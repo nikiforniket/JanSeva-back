@@ -16,6 +16,7 @@ class ComplaintRegisterSerializer(serializers.ModelSerializer):
 class ComplaintListSerializer(serializers.Serializer):
     uuid = serializers.UUIDField()
     full_name = serializers.CharField()
+    phone_number = serializers.CharField()
     department_name = serializers.CharField()
     category_name = serializers.CharField()
     status = serializers.CharField()

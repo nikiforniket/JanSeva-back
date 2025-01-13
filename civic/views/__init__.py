@@ -10,3 +10,7 @@ from civic.views.category import CategoryUpdateView
 from civic.views.complaint import ComplaintRegisterView
 from civic.views.complaint import ComplaintListView
 from civic.views.complaint import ComplaintDetailView
+
+from civic.views.demand_letter import DemandLetterRegisterView
+from civic.views.demand_letter import DemandLetterListView
+from civic.views.demand_letter import DemandLetterDetailView

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from django.db.models import F
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
@@ -65,7 +66,7 @@ class ComplaintListView(generics.ListAPIView):
                 department_name=F("department__name"),
                 category_name=F("category__name"),
                 full_name=F("user__full_name"),
-                number=F("user__phone_number"),
+                phone_number=F("user__phone_number"),
                 location_name=F("location__name"),
             )
             .values(
@@ -73,7 +74,7 @@ class ComplaintListView(generics.ListAPIView):
                 "department_name",
                 "category_name",
                 "full_name",
-                "number",
+                "phone_number",
                 "status",
                 "location_name",
                 "created_at",
