@@ -8,6 +8,7 @@ class ComplaintStatusChoices(JanSevaTextChoices):
     IN_PROGRESS = "in_progress", "In Progress"
     REPORTED = "reported", "Reported"
     REPORT_ACKNOWLEDGED = "report_acknowledged", "Report Acknowledged"
+    REJECTED = "rejected", "Rejected"
     RESOLVED = "resolved", "Resolved"
 
 
@@ -22,4 +23,5 @@ class GeoLocationComplaintChoices(JanSevaTextChoices):
 class DemandLetterStatusChoices(JanSevaTextChoices):
     REGISTERED = "registered", "Registered"
     IN_PROGRESS = "in_progress", "In Progress"
+    REJECTED = "rejected", "Rejected"
     RESOLVED = "resolved", "Resolved"
