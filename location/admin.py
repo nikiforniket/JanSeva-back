@@ -9,7 +9,6 @@ from location.models import State, Constituency, Block, LocalBody, SubLocalBody
 class StateAdmin(admin.ModelAdmin):
     list_display = ("name", "code")
     search_fields = ("name", "code")
-    list_filter = ("name",)
 
 
 @admin.register(Constituency)

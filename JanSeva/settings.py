@@ -41,7 +41,13 @@ DJANGO_APPS = [
 
 J_APPS = ["juser", "location", "feed", "civic", "report", "news"]
 
-THIRD_PARTY_APPS = ["rest_framework", "rest_framework_simplejwt", "corsheaders", "django_extensions"]
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "rest_framework_simplejwt",
+    "corsheaders",
+    "django_extensions",
+    "drf_yasg",
+]
 
 INSTALLED_APPS = DJANGO_APPS + J_APPS + THIRD_PARTY_APPS
 

@@ -19,7 +19,12 @@ from django.contrib import admin
 from django.urls import path
 
 from juser.urls import juser_urls
+from civic.urls import civic_urlpatterns
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
-] + juser_urls
+urlpatterns = (
+    [
+        path("admin/", admin.site.urls),
+    ]
+    + juser_urls
+    + civic_urlpatterns
+)
