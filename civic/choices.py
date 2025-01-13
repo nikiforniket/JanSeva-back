@@ -17,3 +17,9 @@ class GeoLocationComplaintChoices(JanSevaTextChoices):
     GARBAGE = "garbage", "Garbage"
     DRAINAGE = "drainage", "Drainage"
     PIPE_LEAK = "pipe_leak", "Pipe Leak"
+
+
+class DemandLetterStatusChoices(JanSevaTextChoices):
+    REGISTERED = "registered", "Registered"
+    IN_PROGRESS = "in_progress", "In Progress"
+    RESOLVED = "resolved", "Resolved"
