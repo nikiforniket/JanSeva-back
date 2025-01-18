@@ -27,3 +27,9 @@ from civic.serializers.suggestion import SuggestionRegisterSerializer
 from civic.serializers.suggestion import SuggestionListSerializer
 from civic.serializers.suggestion import SuggestionDetailSerializer
 from civic.serializers.suggestion import SuggestionStatusUpdateSerializer
+
+# Geo location serializers
+from civic.serializers.geolocation_complaint import GeoLocationComplaintRegisterSerializer
+from civic.serializers.geolocation_complaint import GeoLocationComplaintListSerializer
+from civic.serializers.geolocation_complaint import GeolocationComplaintDetailSerializer
+from civic.serializers.geolocation_complaint import GeolocationComplaintStatusUpdateSerializer

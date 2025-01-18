@@ -5,7 +5,7 @@ from django.db import models
 from common.models import TimestampedMetaModelMixin
 from django.contrib.auth import get_user_model
 
-from civic.choices import GeoLocationComplaintChoices
+from civic.choices import GeoLocationComplaintChoices, ComplaintStatusChoices
 
 User = get_user_model()
 
@@ -17,6 +17,11 @@ class GeoLocationComplaint(TimestampedMetaModelMixin):
     )
     complaint_type = models.CharField(
         choices=GeoLocationComplaintChoices.choices, max_length=20
+    )
+    status =  status = models.CharField(
+        choices=ComplaintStatusChoices.choices,
+        default=ComplaintStatusChoices.REGISTERED,
+        max_length=25,
     )
     lat = models.DecimalField(max_digits=9, decimal_places=6)
     long = models.DecimalField(max_digits=9, decimal_places=6)
