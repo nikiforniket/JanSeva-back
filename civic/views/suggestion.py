@@ -1,43 +1,41 @@
 # -*- coding: utf-8 -*-
-
 from django.db.models import F
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from civic.serializers.complaint import ComplaintStatusUpdateSerializer
+from civic.models import Suggestion
 from common.pagination import ListPagination
-from civic.models import Complaint
+
 from civic.serializers import (
-    ComplaintRegisterSerializer,
-    ComplaintListSerializer,
-    ComplaintDetailSerializer,
-    ComplaintStatusUpdateSerializer,
+    SuggestionRegisterSerializer,
+    SuggestionListSerializer,
+    SuggestionDetailSerializer,
+    SuggestionStatusUpdateSerializer,
 )
 
 
-class ComplaintRegisterView(generics.CreateAPIView):
+class SuggestionRegisterView(generics.CreateAPIView):
     permission_classes = [
         IsAuthenticated,
     ]
-    serializer_class = ComplaintRegisterSerializer
+    serializer_class = SuggestionRegisterSerializer
 
     def create(self, request, *args, **kwargs):
         try:
-            request.data["user"] = request.user.id
             serializer = self.serializer_class(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(
-                    {"message": "Complaint registered successfully."},
+                    {"message": "Suggestion registered successfully."},
                     status=status.HTTP_201_CREATED,
                 )
             else:
                 return Response(
                     {
-                        "message": "Please provide correct values for complaint registration.",
+                        "message": "Please provide correct values for suggestion registration.",
                         "errors": serializer.errors,
-                        "error_code": 4003,
+                        "error_code": 2003,
                     },
                     status=status.HTTP_400_BAD_REQUEST,
                 )
@@ -46,38 +44,30 @@ class ComplaintRegisterView(generics.CreateAPIView):
                 {
                     "message": f"{e.__class__.__name__}",
                     "errors": [f"{e}"],
-                    "error_code": 4002,
+                    "error_code": 2002,
                 },
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
 
-class ComplaintListView(generics.ListAPIView):
+class SuggestionListView(generics.ListAPIView):
     permission_classes = [
         IsAuthenticated,
     ]
-    serializer_class = ComplaintListSerializer
+    serializer_class = SuggestionListSerializer
     pagination_class = ListPagination
 
     def get_queryset(self):
         return (
-            Complaint.objects.filter(is_deleted=False)
-            .filter(is_deleted=False)
+            Suggestion.objects.filter(is_deleted=False)
             .annotate(
-                department_name=F("department__name"),
-                category_name=F("category__name"),
-                full_name=F("user__full_name"),
-                phone_number=F("user__phone_number"),
-                location_name=F("location__name"),
+                full_name=F("user__full_name"), phone_number=F("user__phone_number")
             )
             .values(
                 "uuid",
-                "department_name",
-                "category_name",
                 "full_name",
                 "phone_number",
                 "status",
-                "location_name",
                 "created_at",
                 "updated_at",
             )
@@ -107,7 +97,7 @@ class ComplaintListView(generics.ListAPIView):
             )
 
 
-class ComplaintDetailView(generics.RetrieveUpdateAPIView):
+class SuggestionDetailView(generics.RetrieveAPIView):
     permission_classes = [
         IsAuthenticated,
     ]
@@ -115,11 +105,9 @@ class ComplaintDetailView(generics.RetrieveUpdateAPIView):
 
     def get_serializer_class(self):
         if self.request.method in ["PATCH"]:
-            return ComplaintStatusUpdateSerializer
-        return ComplaintDetailSerializer
-
-    def get_queryset(self):
-        return Complaint.objects.filter(is_deleted=False)
+            return SuggestionStatusUpdateSerializer
+        else:
+            return SuggestionDetailSerializer
 
     def retrieve(self, request, *args, **kwargs):
         try:

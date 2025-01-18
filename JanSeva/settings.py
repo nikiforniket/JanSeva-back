@@ -154,4 +154,10 @@ CORS_ALLOW_HEADERS = (
     *default_headers,
     "session",
     "source",
+    "Authorization",
+    "ngrok-skip-browser-warning",
 )
+
+from datetime import timedelta
+
+SIMPLE_JWT = {"ACCESS_TOKEN_LIFETIME": timedelta(minutes=1000)}

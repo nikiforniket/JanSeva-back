@@ -28,3 +28,11 @@ class DemandLetterDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = DemandLetter
         exclude = ("is_deleted",)
+
+
+class DemandLetterStatusUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = DemandLetter
+        fields = ("status",)
+        read_only_fields = ("uuid",)

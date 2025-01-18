@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 from rest_framework import serializers
 
 from civic.models import Complaint
@@ -30,3 +31,11 @@ class ComplaintDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Complaint
         exclude = ("is_deleted",)
+
+
+class ComplaintStatusUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Complaint
+        fields = ("status",)
+        read_only_fields = ("uuid",)

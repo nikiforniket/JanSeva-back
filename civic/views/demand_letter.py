@@ -10,6 +10,7 @@ from civic.serializers import (
     DemandLetterRegisterSerializer,
     DemandLetterListSerializer,
     DemandLetterDetailSerializer,
+    DemandLetterStatusUpdateSerializer,
 )
 
 
@@ -58,25 +59,35 @@ class DemandLetterListView(generics.ListAPIView):
     lookup_field = "uuid"
 
     def get_queryset(self):
-        return DemandLetter.objects.filter(is_deleted=False).annotate(
-            full_name=F("user__full_name"),
-            phone_number=F("user__phone_number"),
-        ).values(
-            "uuid",
-            "full_name",
-            "phone_number",
-            "status",
-            "subject",
-            "created_at",
-            "updated_at",
+        return (
+            DemandLetter.objects.filter(is_deleted=False)
+            .annotate(
+                full_name=F("user__full_name"),
+                phone_number=F("user__phone_number"),
+            )
+            .values(
+                "uuid",
+                "full_name",
+                "phone_number",
+                "status",
+                "subject",
+                "created_at",
+                "updated_at",
+            )
         )
 
-class DemandLetterDetailView(generics.RetrieveAPIView):
+
+class DemandLetterDetailView(generics.RetrieveUpdateAPIView):
     permission_classes = [
         IsAuthenticated,
     ]
     serializer_class = DemandLetterDetailSerializer
     lookup_field = "uuid"
+
+    def get_serializer_class(self):
+        if self.request.method == "PATCH":
+            return DemandLetterStatusUpdateSerializer
+        return self.serializer_class
 
     def get_queryset(self):
         return DemandLetter.objects.filter(is_deleted=False)

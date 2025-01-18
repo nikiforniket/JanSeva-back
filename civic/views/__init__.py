@@ -14,3 +14,7 @@ from civic.views.complaint import ComplaintDetailView
 from civic.views.demand_letter import DemandLetterRegisterView
 from civic.views.demand_letter import DemandLetterListView
 from civic.views.demand_letter import DemandLetterDetailView
+
+from civic.views.suggestion import SuggestionRegisterView
+from civic.views.suggestion import SuggestionListView
+from civic.views.suggestion import SuggestionDetailView

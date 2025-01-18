@@ -25,3 +25,10 @@ class DemandLetterStatusChoices(JanSevaTextChoices):
     IN_PROGRESS = "in_progress", "In Progress"
     REJECTED = "rejected", "Rejected"
     RESOLVED = "resolved", "Resolved"
+
+
+class SuggestionStatusChoices(JanSevaTextChoices):
+    REGISTERED = "registered", "Registered"
+    VIEWED = "viewed", "Viewed"
+    IN_CONSIDERATION = "in_consideration", "In consideration"
+    REJECTED = "rejected", "Rejected"
