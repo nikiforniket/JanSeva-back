@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -39,7 +40,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-J_APPS = ["juser", "location", "feed", "civic", "report", "news"]
+J_APPS = ["juser", "location", "civic", "report", "news"]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
@@ -161,3 +162,7 @@ CORS_ALLOW_HEADERS = (
 from datetime import timedelta
 
 SIMPLE_JWT = {"ACCESS_TOKEN_LIFETIME": timedelta(minutes=1000)}
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = "https://physically-calm-hermit.ngrok-free.app/"

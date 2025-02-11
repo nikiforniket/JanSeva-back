@@ -34,7 +34,6 @@ class JanSevaUser(AbstractUser, PermissionsMixin):
     email = models.EmailField(
         _("email"), max_length=320, null=True, blank=True, unique=True
     )
-    full_name = models.CharField(_("full name"), max_length=256, blank=False)
     is_superuser = models.BooleanField(
         default=False,
         verbose_name="superuser status",
@@ -79,11 +78,10 @@ class JanSevaUser(AbstractUser, PermissionsMixin):
     EMAIL_FIELD = "phone_number"
     USERNAME_FIELD = "phone_number"
     REQUIRED_FIELDS = [
-        "full_name",
     ]
 
     def __str__(self):
-        return f"{self.full_name} -> {self.email}"
+        return f"{self.full_name} -> {self.phone_number}"
 
     class Meta:
         verbose_name = "JanSeva User"

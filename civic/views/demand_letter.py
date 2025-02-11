@@ -56,7 +56,6 @@ class DemandLetterListView(generics.ListAPIView):
     ]
     serializer_class = DemandLetterListSerializer
     pagination_class = ListPagination
-    lookup_field = "uuid"
 
     def get_queryset(self):
         return (
@@ -95,7 +94,7 @@ class DemandLetterDetailView(generics.RetrieveUpdateAPIView):
     def retrieve(self, request, *args, **kwargs):
         try:
             instance = self.get_object()
-            serializer = self.serializer_class(instance)
+            serializer = self.get_serializer_class()(instance)
             return Response(serializer.data)
         except Exception as e:
             return Response(

@@ -2,14 +2,14 @@
 
 from rest_framework import serializers
 
-from civic.models import Department
+from civic.models import Sector
 from civic.serializers.category import CategoryMetaSerializer
 
 
 class DepartmentSelectSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Department
+        model = Sector
         fields = ("id", "name", "created_at", "updated_at")
 
 
@@ -19,7 +19,7 @@ class DepartmentListSerializer(DepartmentSelectSerializer): ...
 class DepartmentSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Department
+        model = Sector
         fields = ("id", "name")
         read_only_fields = ("id",)
 
@@ -28,7 +28,7 @@ class DepartmentDetailSerializer(serializers.ModelSerializer):
     categories = CategoryMetaSerializer(many=True, read_only=True)
 
     class Meta:
-        model = Department
+        model = Sector
         fields = ("id", "name", "categories", "created_at", "updated_at")
         read_only_fields = ("id",)
 
@@ -36,6 +36,6 @@ class DepartmentDetailSerializer(serializers.ModelSerializer):
 class DepartmentUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Department
+        model = Sector
         fields = ("name",)
         read_only_fields = ("id",)

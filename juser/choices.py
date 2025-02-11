@@ -7,6 +7,7 @@ class ProfileTypeChoices(JanSevaTextChoices):
 
     ADMIN = "AD", "Admin"
     PARTY_MEMBER = "PM", "Party Member"
+    VOTER = "VM", "Voter"
 
 
 class ProfileTypeDocsChoices(JanSevaTextChoices):

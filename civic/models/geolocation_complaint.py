@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import uuid
 
 from django.db import models
 
@@ -12,13 +13,14 @@ User = get_user_model()
 
 class GeoLocationComplaint(TimestampedMetaModelMixin):
 
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="geolocation_complaints"
     )
     complaint_type = models.CharField(
         choices=GeoLocationComplaintChoices.choices, max_length=20
     )
-    status =  status = models.CharField(
+    status = models.CharField(
         choices=ComplaintStatusChoices.choices,
         default=ComplaintStatusChoices.REGISTERED,
         max_length=25,
@@ -28,12 +30,12 @@ class GeoLocationComplaint(TimestampedMetaModelMixin):
     description = models.TextField(blank=True)
 
     def __str__(self):
-        return f"{self.id} | {self.user} -> {self.lat}, {self.long}"
+        return f"{self.uuid} | {self.user} | {self.lat}, {self.long}"
 
 
 class GeoLocationComplaintFiles(TimestampedMetaModelMixin):
     complaint = models.ForeignKey(
-        GeoLocationComplaint, on_delete=models.CASCADE, related_name="files"
+        GeoLocationComplaint, on_delete=models.CASCADE, related_name="files", to_field="uuid"
     )
     file = models.FileField(upload_to="geolocation_complaints/")
 

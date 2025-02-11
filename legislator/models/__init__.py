@@ -1,0 +1,1 @@
+from legislator.models.representative import Representative

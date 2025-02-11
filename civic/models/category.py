@@ -3,14 +3,14 @@
 from django.db import models
 
 from common.models import TimestampedMetaModelMixin
-from civic.models.department import Department
+from civic.models.sector import Sector
 
 
 class Category(TimestampedMetaModelMixin):
 
     name = models.CharField(max_length=255)
     department = models.ForeignKey(
-        Department, related_name="categories", on_delete=models.DO_NOTHING
+        Sector, related_name="categories", on_delete=models.DO_NOTHING
     )
 
     def __str__(self):

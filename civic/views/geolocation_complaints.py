@@ -1,26 +1,26 @@
 # -*- coding: utf-8 -*-
-
 from django.db.models import F
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from civic.serializers.complaint import ComplaintStatusUpdateSerializer
 from common.pagination import ListPagination
-from civic.models import Complaint
+
+from civic.models import GeoLocationComplaint
+
 from civic.serializers import (
-    ComplaintRegisterSerializer,
-    ComplaintListSerializer,
-    ComplaintDetailSerializer,
-    ComplaintStatusUpdateSerializer,
+    GeoLocationComplaintRegisterSerializer,
+    GeoLocationComplaintListSerializer,
+    GeolocationComplaintStatusUpdateSerializer,
+    GeolocationComplaintDetailSerializer,
 )
 
 
-class ComplaintRegisterView(generics.CreateAPIView):
+class GeolocationComplainRegisterView(generics.CreateAPIView):
     permission_classes = [
         IsAuthenticated,
     ]
-    serializer_class = ComplaintRegisterSerializer
+    serializer_class = GeoLocationComplaintRegisterSerializer
 
     def create(self, request, *args, **kwargs):
         try:
@@ -29,13 +29,13 @@ class ComplaintRegisterView(generics.CreateAPIView):
             if serializer.is_valid():
                 serializer.save()
                 return Response(
-                    {"message": "Complaint registered successfully."},
+                    {"message": "Geolocation complaint registered successfully."},
                     status=status.HTTP_201_CREATED,
                 )
             else:
                 return Response(
                     {
-                        "message": "Please provide correct values for complaint registration.",
+                        "message": "Please provide correct values for geolocation complaint registration.",
                         "errors": serializer.errors,
                         "error_code": 4003,
                     },
@@ -52,35 +52,27 @@ class ComplaintRegisterView(generics.CreateAPIView):
             )
 
 
-class ComplaintListView(generics.ListAPIView):
+class GeolocationComplaintListView(generics.ListAPIView):
     permission_classes = [
         IsAuthenticated,
     ]
-    serializer_class = ComplaintListSerializer
+    serializer_class = GeoLocationComplaintListSerializer
     pagination_class = ListPagination
 
     def get_queryset(self):
-        return (
-            Complaint.objects.filter(is_deleted=False)
-            .filter(is_deleted=False)
-            .annotate(
-                department_name=F("department__name"),
-                category_name=F("category__name"),
-                full_name=F("user__full_name"),
-                phone_number=F("user__phone_number"),
-                location_name=F("location__name"),
-            )
-            .values(
-                "uuid",
-                "department_name",
-                "category_name",
-                "full_name",
-                "phone_number",
-                "status",
-                "location_name",
-                "created_at",
-                "updated_at",
-            )
+        return GeoLocationComplaint.objects.filter(is_deleted=False).annotate(
+            full_name=F("user__full_name"),
+            phone_number=F("user__phone_number")
+        ).values(
+            "uuid",
+            "full_name",
+            "phone_number",
+            "complaint_type",
+            "lat",
+            "long",
+            "status",
+            "created_at",
+            "updated_at"
         )
 
     def filter_queryset(self, queryset):
@@ -107,7 +99,7 @@ class ComplaintListView(generics.ListAPIView):
             )
 
 
-class ComplaintDetailView(generics.RetrieveUpdateAPIView):
+class GeolocationComplaintDetailView(generics.RetrieveUpdateAPIView):
     permission_classes = [
         IsAuthenticated,
     ]
@@ -115,11 +107,13 @@ class ComplaintDetailView(generics.RetrieveUpdateAPIView):
 
     def get_serializer_class(self):
         if self.request.method in ["PATCH"]:
-            return ComplaintStatusUpdateSerializer
-        return ComplaintDetailSerializer
+            return GeolocationComplaintStatusUpdateSerializer
+        return GeolocationComplaintDetailSerializer
 
     def get_queryset(self):
-        return Complaint.objects.filter(is_deleted=False)
+        return GeoLocationComplaint.objects.filter(is_deleted=False).prefetch_related(
+            "files"
+        )
 
     def retrieve(self, request, *args, **kwargs):
         try:
@@ -127,7 +121,6 @@ class ComplaintDetailView(generics.RetrieveUpdateAPIView):
             serializer = self.get_serializer_class()(instance)
             return Response(serializer.data)
         except Exception as e:
-            raise e
             return Response(
                 {
                     "message": f"{e.__class__.__name__}",

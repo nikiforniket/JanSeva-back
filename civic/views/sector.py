@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from common.pagination import ListPagination, SelectPagination
-from civic.models import Department
+from civic.models import Sector
 from civic.serializers import (
     DepartmentSerializer,
     DepartmentSelectSerializer,
@@ -59,7 +59,7 @@ class DepartmentSelectView(generics.ListAPIView):
     pagination_class = SelectPagination
 
     def get_queryset(self):
-        return Department.objects.filter(is_deleted=False)
+        return Sector.objects.filter(is_deleted=False)
 
 
 class DepartmentListView(generics.ListAPIView):
@@ -70,7 +70,7 @@ class DepartmentListView(generics.ListAPIView):
     pagination_class = ListPagination
 
     def get_queryset(self):
-        return Department.objects.filter(is_deleted=False).prefetch_related(
+        return Sector.objects.filter(is_deleted=False).prefetch_related(
             "categories"
         )
 
@@ -81,7 +81,7 @@ class DepartmentUpdateDetailView(generics.RetrieveUpdateAPIView):
     ]
 
     def get_queryset(self):
-        return Department.objects.filter(is_deleted=False).prefetch_related(
+        return Sector.objects.filter(is_deleted=False).prefetch_related(
             "categories"
         )
 

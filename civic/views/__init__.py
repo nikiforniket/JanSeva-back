@@ -1,7 +1,7 @@
-from civic.views.department import DepartmentRegisterView
-from civic.views.department import DepartmentSelectView
-from civic.views.department import DepartmentUpdateDetailView
-from civic.views.department import DepartmentListView
+from civic.views.sector import DepartmentRegisterView
+from civic.views.sector import DepartmentSelectView
+from civic.views.sector import DepartmentUpdateDetailView
+from civic.views.sector import DepartmentListView
 
 from civic.views.category import CategoryRegisterView
 from civic.views.category import CategorySelectView
@@ -18,3 +18,8 @@ from civic.views.demand_letter import DemandLetterDetailView
 from civic.views.suggestion import SuggestionRegisterView
 from civic.views.suggestion import SuggestionListView
 from civic.views.suggestion import SuggestionDetailView
+
+
+from civic.views.geolocation_complaints import GeolocationComplainRegisterView
+from civic.views.geolocation_complaints import GeolocationComplaintListView
+from civic.views.geolocation_complaints import GeolocationComplaintDetailView

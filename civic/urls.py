@@ -18,7 +18,10 @@ from civic.views import (
     DemandLetterDetailView,
     SuggestionRegisterView,
     SuggestionListView,
-    SuggestionDetailView
+    SuggestionDetailView,
+    GeolocationComplainRegisterView,
+    GeolocationComplaintListView,
+    GeolocationComplaintDetailView
 )
 
 
@@ -73,16 +76,23 @@ civic_urlpatterns = [
     path(
         "suggestions/register/",
         SuggestionRegisterView.as_view(),
-        name="suggestions-register"
+        name="suggestions-register",
     ),
-    path(
-        "suggestions",
-        SuggestionListView.as_view(),
-        name="suggestions"
-    ),
+    path("suggestions/", SuggestionListView.as_view(), name="suggestions"),
     path(
         "suggestions/<uuid:uuid>/",
         SuggestionDetailView.as_view(),
-        name="suggestions-detail"
+        name="suggestions-detail",
+    ),
+    path(
+        "geocomplaints/register/",
+        GeolocationComplainRegisterView.as_view(),
+        name="geocomplaints-register"
+    ),
+    path(
+        "geocomplaints/", GeolocationComplaintListView.as_view(), name="geocomplaints"
+    ),
+    path(
+        "geocomplaints/<uuid:uuid>/", GeolocationComplaintDetailView.as_view(), name="geocomplaints-detail"
     )
 ]

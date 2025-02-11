@@ -23,6 +23,7 @@ class SuggestionRegisterView(generics.CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         try:
+            request.data["user"] = request.user.id
             serializer = self.serializer_class(data=request.data)
             if serializer.is_valid():
                 serializer.save()
@@ -97,11 +98,14 @@ class SuggestionListView(generics.ListAPIView):
             )
 
 
-class SuggestionDetailView(generics.RetrieveAPIView):
+class SuggestionDetailView(generics.RetrieveUpdateAPIView):
     permission_classes = [
         IsAuthenticated,
     ]
     lookup_field = "uuid"
+
+    def get_queryset(self):
+        return Suggestion.objects.filter(is_deleted=False)
 
     def get_serializer_class(self):
         if self.request.method in ["PATCH"]:
@@ -112,7 +116,7 @@ class SuggestionDetailView(generics.RetrieveAPIView):
     def retrieve(self, request, *args, **kwargs):
         try:
             instance = self.get_object()
-            serializer = self.serializer_class(instance)
+            serializer = self.get_serializer_class()(instance)
             return Response(serializer.data)
         except Exception as e:
             return Response(

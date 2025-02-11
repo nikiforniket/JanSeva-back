@@ -6,7 +6,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 from common.models import TimestampedMetaModelMixin
-from civic.models.department import Department
+from civic.models.sector import Sector
 from civic.models.category import Category
 from civic.choices import ComplaintStatusChoices
 
@@ -20,7 +20,7 @@ class Complaint(TimestampedMetaModelMixin):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="complaints")
     department = models.ForeignKey(
-        Department, on_delete=models.DO_NOTHING, related_name="complaints"
+        Sector, on_delete=models.DO_NOTHING, related_name="complaints"
     )
     category = models.ForeignKey(
         Category, on_delete=models.DO_NOTHING, related_name="complaints"
