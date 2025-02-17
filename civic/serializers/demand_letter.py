@@ -19,8 +19,12 @@ class DemandLetterListSerializer(serializers.Serializer):
     phone_number = serializers.CharField()
     status = serializers.CharField()
     subject = serializers.CharField()
+    description = serializers.SerializerMethodField()
     created_at = serializers.DateTimeField()
     updated_at = serializers.DateTimeField()
+
+    def get_description(self, obj):
+        return obj["description"][:150]
 
 
 class DemandLetterDetailSerializer(serializers.ModelSerializer):

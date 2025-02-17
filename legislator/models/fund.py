@@ -20,3 +20,19 @@ class Fund(TimestampedMetaModelMixin):
         verbose_name = "Fund"
         verbose_name_plural = "Funds"
         unique_together = ["representative", "year"]
+
+
+class Allocation(TimestampedMetaModelMixin):
+
+    amount = models.PositiveIntegerField()
+    fund = models.ForeignKey(Fund, related_name="allocations", on_delete=models.DO_NOTHING)
+    month_start = models.PositiveIntegerField()
+    month_end = models.PositiveIntegerField()
+    description = models.TextField()
+
+    def __str__(self):
+        return f"{self.fund} | {self.amount}"
+
+    class Meta:
+        verbose_name = "Allocation"
+        verbose_name_plural = "Allocations"

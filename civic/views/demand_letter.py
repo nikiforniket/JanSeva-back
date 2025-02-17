@@ -70,6 +70,7 @@ class DemandLetterListView(generics.ListAPIView):
                 "phone_number",
                 "status",
                 "subject",
+                "description",
                 "created_at",
                 "updated_at",
             )

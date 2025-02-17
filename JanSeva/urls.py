@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 
 from juser.urls import juser_urls
 from civic.urls import civic_urlpatterns
+from legislator.urls import legislator_urlpatterns
 
 urlpatterns = (
     [
@@ -30,4 +31,5 @@ urlpatterns = (
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     + juser_urls
     + civic_urlpatterns
+    + legislator_urlpatterns
 )

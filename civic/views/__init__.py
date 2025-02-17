@@ -23,3 +23,9 @@ from civic.views.suggestion import SuggestionDetailView
 from civic.views.geolocation_complaints import GeolocationComplainRegisterView
 from civic.views.geolocation_complaints import GeolocationComplaintListView
 from civic.views.geolocation_complaints import GeolocationComplaintDetailView
+
+
+from civic.views.scheme import SchemeRegisterView
+from civic.views.scheme import SchemeSelectView
+from civic.views.scheme import SchemeDetailView
+from civic.views.scheme import SchemeListView

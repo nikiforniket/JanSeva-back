@@ -6,21 +6,21 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from common.pagination import ListPagination, SelectPagination
-from civic.models import Sector
+from civic.models import Scheme
 from civic.serializers import (
-    DepartmentSerializer,
-    DepartmentSelectSerializer,
-    DepartmentDetailSerializer,
-    DepartmentUpdateSerializer,
-    DepartmentListSerializer,
+    SchemeRegisterSerializer,
+    SchemeListSerializer,
+    SchemeDetailSerializer,
+    SchemeUpdateSerializer,
+    SchemeSelectSerializer
 )
 
 
-class DepartmentRegisterView(generics.CreateAPIView):
+class SchemeRegisterView(generics.CreateAPIView):
     permission_classes = [
         IsAuthenticated,
     ]
-    serializer_class = DepartmentSerializer
+    serializer_class = SchemeRegisterSerializer
 
     def create(self, request, *args, **kwargs):
         try:
@@ -28,15 +28,15 @@ class DepartmentRegisterView(generics.CreateAPIView):
             if serializer.is_valid():
                 serializer.save()
                 return Response(
-                    {"message": "Department registered successfully."},
+                    {"message": "Scheme registered successfully."},
                     status=status.HTTP_201_CREATED,
                 )
             else:
                 return Response(
                     {
-                        "message": "Please provide correct values for department registration.",
+                        "message": "Please provide correct values for scheme registration.",
                         "errors": serializer.errors,
-                        "error_code": 2003,
+                        "error_code": 3003,
                     },
                     status=status.HTTP_400_BAD_REQUEST,
                 )
@@ -45,21 +45,21 @@ class DepartmentRegisterView(generics.CreateAPIView):
                 {
                     "message": f"{e.__class__.__name__}",
                     "errors": [f"{e}"],
-                    "error_code": 2002,
+                    "error_code": 3002,
                 },
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
 
-class DepartmentSelectView(generics.ListAPIView):
+class SchemeSelectView(generics.ListAPIView):
     permission_classes = [
         IsAuthenticated,
     ]
-    serializer_class = DepartmentSelectSerializer
+    serializer_class = SchemeSelectSerializer
     pagination_class = SelectPagination
 
     def get_queryset(self):
-        return Sector.objects.filter(is_deleted=False)
+        return Scheme.objects.filter(is_deleted=False)
 
     def filter_queryset(self, queryset):
         search = self.request.query_params.get("search", None)
@@ -68,29 +68,34 @@ class DepartmentSelectView(generics.ListAPIView):
         return queryset
 
 
-class DepartmentListView(generics.ListAPIView):
+class SchemeListView(generics.ListAPIView):
     permission_classes = [
         IsAuthenticated,
     ]
-    serializer_class = DepartmentListSerializer
+    serializer_class = SchemeListSerializer
     pagination_class = ListPagination
 
     def get_queryset(self):
-        return Sector.objects.filter(is_deleted=False)
+        return Scheme.objects.filter(is_deleted=False).values(
+            "id",
+            "name",
+            "sector",
+            "year",
+            "is_active",
+            "created_at",
+            "updated_at"
+        )
 
 
-class DepartmentUpdateDetailView(generics.RetrieveUpdateAPIView):
+class SchemeDetailView(generics.RetrieveUpdateAPIView):
     permission_classes = [
         IsAuthenticated,
     ]
 
     def get_queryset(self):
-        return Sector.objects.filter(is_deleted=False).prefetch_related(
-            "categories"
-        )
+        return Scheme.objects.filter(is_deleted=False)
 
     def get_serializer_class(self):
-        if self.request.method == "GET":
-            return DepartmentDetailSerializer
-        elif self.request.method in ["PATCH", "PUT"]:
-            return DepartmentUpdateSerializer
+        if self.request.method in ["PATCH"]:
+            return SchemeUpdateSerializer
+        return SchemeUpdateSerializer

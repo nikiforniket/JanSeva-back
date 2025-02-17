@@ -37,3 +37,10 @@ from civic.serializers.geolocation_complaint import GeolocationComplaintDetailSe
 from civic.serializers.geolocation_complaint import (
     GeolocationComplaintStatusUpdateSerializer,
 )
+
+# Scheme serializers
+from civic.serializers.scheme import SchemeListSerializer
+from civic.serializers.scheme import SchemeDetailSerializer
+from civic.serializers.scheme import SchemeUpdateSerializer
+from civic.serializers.scheme import SchemeRegisterSerializer
+from civic.serializers.scheme import SchemeSelectSerializer

@@ -9,4 +9,4 @@ class RepresentativeTypeChoices(JanSevaTextChoices):
     SARPANCH = "SARPANCH", "Sarpanch"
     UP_SARPANCH = "UP_SARPANCH", "Up-Sarpanch"
     MEMBER = "MEMBER", "Member"
-    CHAIRMAN = "CHAIRMAN
+    CHAIRMAN = "CHAIRMAN", "Chairman"

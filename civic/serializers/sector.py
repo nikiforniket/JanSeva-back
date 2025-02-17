@@ -10,10 +10,14 @@ class DepartmentSelectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sector
+        fields = ("id", "name",)
+
+
+class DepartmentListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Sector
         fields = ("id", "name", "created_at", "updated_at")
-
-
-class DepartmentListSerializer(DepartmentSelectSerializer): ...
 
 
 class DepartmentSerializer(serializers.ModelSerializer):

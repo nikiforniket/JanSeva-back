@@ -40,7 +40,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-J_APPS = ["juser", "location", "civic", "report", "news"]
+J_APPS = ["juser", "location", "civic", "report", "news", "legislator"]
 
 THIRD_PARTY_APPS = [
     "rest_framework",

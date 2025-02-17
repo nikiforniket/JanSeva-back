@@ -69,6 +69,7 @@ class SuggestionListView(generics.ListAPIView):
                 "full_name",
                 "phone_number",
                 "status",
+                "description",
                 "created_at",
                 "updated_at",
             )
