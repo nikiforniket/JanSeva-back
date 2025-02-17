@@ -10,6 +10,8 @@ from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.core import validators
 from juser.managers import JUserManager
 
+from location.models import SubLocalBody
+
 
 class JanSevaUser(AbstractUser, PermissionsMixin):
     """
@@ -65,6 +67,13 @@ class JanSevaUser(AbstractUser, PermissionsMixin):
     full_name = models.CharField(_("full name"), max_length=256, blank=True)
     phone_number = models.CharField(
         _("Phone number of User"), max_length=13, blank=False, null=False, unique=True
+    )
+    location = models.ForeignKey(
+        SubLocalBody,
+        related_name="users",
+        on_delete=models.DO_NOTHING,
+        null=True,
+        blank=True,
     )
     date_joined = models.DateTimeField(
         verbose_name="date/time joined at", default=timezone.now

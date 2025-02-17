@@ -23,6 +23,7 @@ from django.conf.urls.static import static
 from juser.urls import juser_urls
 from civic.urls import civic_urlpatterns
 from legislator.urls import legislator_urlpatterns
+from location.urls import location_urlpatterns
 
 urlpatterns = (
     [
@@ -32,4 +33,5 @@ urlpatterns = (
     + juser_urls
     + civic_urlpatterns
     + legislator_urlpatterns
+    + location_urlpatterns
 )

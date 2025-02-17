@@ -22,9 +22,9 @@ class RepresentativeSelectView(generics.ListAPIView):
             Representative.objects.filter(is_deleted=False)
             .annotate(
                 full_name=F("user__full_name"),
-                constituency=F("constituency__name"),
+                constituency_name=F("constituency__name"),
             )
-            .values("id", "full_name", "constituency")
+            .values("id", "full_name", "constituency_name")
         )
 
     def filter_queryset(self, queryset):
