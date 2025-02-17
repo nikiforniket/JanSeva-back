@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 class JUserManager(BaseUserManager):
     """User manager for users of JanSeva application"""
 
-    def create_user(self, full_name, password, phone_number, create=True):
+    def create_user(self, full_name, password, phone_number, email=None, create=True):
         if not full_name:
             raise ValidationError("Full name is required")
         if not password:
@@ -17,14 +17,15 @@ class JUserManager(BaseUserManager):
         user = self.model(
             full_name=full_name,
             phone_number=phone_number,
+            email=email
         )
         user.set_password(password)
         if create:
             user.save(using=self._db)
         return user
 
-    def create_superuser(self, full_name, password, phone_number):
-        user = self.create_user(full_name, password, phone_number, create=False)
+    def create_superuser(self, full_name, password, phone_number, email=None):
+        user = self.create_user(full_name, password, phone_number, email=email, create=False)
         user.is_superuser = True
         user.is_staff = True
         user.save(using=self._db)

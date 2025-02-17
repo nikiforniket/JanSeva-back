@@ -14,3 +14,10 @@ class ProfileTypeDocsChoices(JanSevaTextChoices):
 
     AADHAR = "AD", "Aadhar card"
     VOTER_CARD = "VT", "Voter card"
+
+
+class GenderChoices(JanSevaTextChoices):
+
+    MALE = "M", "Male"
+    FEMALE = "F", "Female"
+    OTHER = "O", "Other"

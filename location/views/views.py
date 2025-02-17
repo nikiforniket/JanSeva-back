@@ -64,7 +64,7 @@ class SubLocalBodySelectView(generics.ListAPIView):
 
     def filter_queryset(self, queryset):
         search = self.request.query_params.get("search", None)
-        local_body = self.request.query_params.get(" ", None)
+        local_body = self.request.query_params.get("local_body", None)
         if search:
             queryset = queryset.filter(name__icontains=search)
         if local_body:
