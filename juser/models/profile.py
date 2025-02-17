@@ -24,7 +24,6 @@ class JanSevaUserProfile(TimestampedMetaModelMixin):
     aadhar_id_is_verified = models.BooleanField(default=False)
     photo = models.FileField(upload_to="users/profile/picture")
 
-
     def __str__(self):
         return f"{self.profile_type} | {self.user}"
 

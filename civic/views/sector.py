@@ -85,9 +85,7 @@ class DepartmentUpdateDetailView(generics.RetrieveUpdateAPIView):
     ]
 
     def get_queryset(self):
-        return Sector.objects.filter(is_deleted=False).prefetch_related(
-            "categories"
-        )
+        return Sector.objects.filter(is_deleted=False).prefetch_related("categories")
 
     def get_serializer_class(self):
         if self.request.method == "GET":

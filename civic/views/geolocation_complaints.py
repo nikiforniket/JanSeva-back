@@ -60,19 +60,22 @@ class GeolocationComplaintListView(generics.ListAPIView):
     pagination_class = ListPagination
 
     def get_queryset(self):
-        return GeoLocationComplaint.objects.filter(is_deleted=False).annotate(
-            full_name=F("user__full_name"),
-            phone_number=F("user__phone_number")
-        ).values(
-            "uuid",
-            "full_name",
-            "phone_number",
-            "complaint_type",
-            "lat",
-            "long",
-            "status",
-            "created_at",
-            "updated_at"
+        return (
+            GeoLocationComplaint.objects.filter(is_deleted=False)
+            .annotate(
+                full_name=F("user__full_name"), phone_number=F("user__phone_number")
+            )
+            .values(
+                "uuid",
+                "full_name",
+                "phone_number",
+                "complaint_type",
+                "lat",
+                "long",
+                "status",
+                "created_at",
+                "updated_at",
+            )
         )
 
     def filter_queryset(self, queryset):

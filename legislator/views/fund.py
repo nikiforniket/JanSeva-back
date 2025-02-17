@@ -6,7 +6,15 @@ from rest_framework.response import Response
 
 from common.pagination import ListPagination, SelectPagination
 from legislator.models import Fund, Allocation
-from legislator.serializers import FundRegisterSerializer, FundListSerializer, FundDetailSerializer, FundUpdateSerializer, AllocationRegisterSerializer, AllocationSerializer, AllocationUpdateSerializer
+from legislator.serializers import (
+    FundRegisterSerializer,
+    FundListSerializer,
+    FundDetailSerializer,
+    FundUpdateSerializer,
+    AllocationRegisterSerializer,
+    AllocationSerializer,
+    AllocationUpdateSerializer,
+)
 
 
 class FundRegisterView(generics.CreateAPIView):
@@ -52,16 +60,18 @@ class FundListView(generics.ListAPIView):
     pagination_class = ListPagination
 
     def get_queryset(self):
-        return Fund.objects.filter(is_deleted=False).annotate(representative_name=F(
-            'representative__user__full_name'
-        )).values(
-            "id",
-            "representative_name",
-            "description",
-            "year",
-            "amount",
-            "created_at",
-            "updated_at"
+        return (
+            Fund.objects.filter(is_deleted=False)
+            .annotate(representative_name=F("representative__user__full_name"))
+            .values(
+                "id",
+                "representative_name",
+                "description",
+                "year",
+                "amount",
+                "created_at",
+                "updated_at",
+            )
         )
 
 

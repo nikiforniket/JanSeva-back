@@ -35,7 +35,10 @@ class GeoLocationComplaint(TimestampedMetaModelMixin):
 
 class GeoLocationComplaintFiles(TimestampedMetaModelMixin):
     complaint = models.ForeignKey(
-        GeoLocationComplaint, on_delete=models.CASCADE, related_name="files", to_field="uuid"
+        GeoLocationComplaint,
+        on_delete=models.CASCADE,
+        related_name="files",
+        to_field="uuid",
     )
     file = models.FileField(upload_to="geolocation_complaints/")
 

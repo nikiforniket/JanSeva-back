@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
-from civic.models import (GeoLocationComplaint,
-                          GeoLocationComplaintFiles)
+from civic.models import GeoLocationComplaint, GeoLocationComplaintFiles
 
 
 class GeoLocationComplaintFilesInline(admin.TabularInline):

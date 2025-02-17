@@ -12,10 +12,16 @@ User = get_user_model()
 
 class Representative(TimestampedMetaModelMixin):
 
-    user = models.OneToOneField(User, related_name="representative", on_delete=models.DO_NOTHING)
-    representative_type = models.CharField(max_length=20, choices=RepresentativeTypeChoices.choices)
+    user = models.OneToOneField(
+        User, related_name="representative", on_delete=models.DO_NOTHING
+    )
+    representative_type = models.CharField(
+        max_length=20, choices=RepresentativeTypeChoices.choices
+    )
     address = models.TextField()
-    constituency = models.ForeignKey(Constituency, related_name="representatives", on_delete=models.DO_NOTHING)
+    constituency = models.ForeignKey(
+        Constituency, related_name="representatives", on_delete=models.DO_NOTHING
+    )
 
     def __str__(self):
         return f"{self.user} | {self.constituency}"

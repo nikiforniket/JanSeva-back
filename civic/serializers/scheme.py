@@ -17,7 +17,10 @@ class SchemeSelectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Scheme
-        fields = ("id", "name",)
+        fields = (
+            "id",
+            "name",
+        )
 
 
 class SchemeListSerializer(serializers.Serializer):
@@ -34,7 +37,15 @@ class SchemeDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Scheme
-        fields = ("id", "name", "sector", "year", "is_active", "created_at", "updated_at")
+        fields = (
+            "id",
+            "name",
+            "sector",
+            "year",
+            "is_active",
+            "created_at",
+            "updated_at",
+        )
         read_only_fields = ("id",)
 
 

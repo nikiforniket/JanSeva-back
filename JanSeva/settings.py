@@ -163,6 +163,6 @@ from datetime import timedelta
 
 SIMPLE_JWT = {"ACCESS_TOKEN_LIFETIME": timedelta(minutes=1000)}
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 MEDIA_URL = "https://physically-calm-hermit.ngrok-free.app/"

@@ -11,7 +11,9 @@ class Fund(TimestampedMetaModelMixin):
     amount = models.PositiveIntegerField(null=True, blank=True)
     year = models.PositiveIntegerField()
     description = models.TextField()
-    representative = models.ForeignKey(Representative, related_name="funds", on_delete=models.DO_NOTHING)
+    representative = models.ForeignKey(
+        Representative, related_name="funds", on_delete=models.DO_NOTHING
+    )
 
     def __str__(self):
         return f"{self.representative} | {self.amount} | {self.year}"
@@ -25,7 +27,9 @@ class Fund(TimestampedMetaModelMixin):
 class Allocation(TimestampedMetaModelMixin):
 
     amount = models.PositiveIntegerField()
-    fund = models.ForeignKey(Fund, related_name="allocations", on_delete=models.DO_NOTHING)
+    fund = models.ForeignKey(
+        Fund, related_name="allocations", on_delete=models.DO_NOTHING
+    )
     month_start = models.PositiveIntegerField()
     month_end = models.PositiveIntegerField()
     description = models.TextField()

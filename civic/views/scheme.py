@@ -12,7 +12,7 @@ from civic.serializers import (
     SchemeListSerializer,
     SchemeDetailSerializer,
     SchemeUpdateSerializer,
-    SchemeSelectSerializer
+    SchemeSelectSerializer,
 )
 
 
@@ -77,13 +77,7 @@ class SchemeListView(generics.ListAPIView):
 
     def get_queryset(self):
         return Scheme.objects.filter(is_deleted=False).values(
-            "id",
-            "name",
-            "sector",
-            "year",
-            "is_active",
-            "created_at",
-            "updated_at"
+            "id", "name", "sector", "year", "is_active", "created_at", "updated_at"
         )
 
 

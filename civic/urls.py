@@ -25,7 +25,7 @@ from civic.views import (
     SchemeRegisterView,
     SchemeSelectView,
     SchemeDetailView,
-    SchemeListView
+    SchemeListView,
 )
 
 
@@ -91,13 +91,15 @@ civic_urlpatterns = [
     path(
         "geocomplaints/register/",
         GeolocationComplainRegisterView.as_view(),
-        name="geocomplaints-register"
+        name="geocomplaints-register",
     ),
     path(
         "geocomplaints/", GeolocationComplaintListView.as_view(), name="geocomplaints"
     ),
     path(
-        "geocomplaints/<uuid:uuid>/", GeolocationComplaintDetailView.as_view(), name="geocomplaints-detail"
+        "geocomplaints/<uuid:uuid>/",
+        GeolocationComplaintDetailView.as_view(),
+        name="geocomplaints-detail",
     ),
     path(
         "schemes/register/",
@@ -114,5 +116,5 @@ civic_urlpatterns = [
         "schemes/<int:pk>/",
         SchemeDetailView.as_view(),
         name="schemes-detail",
-    )
+    ),
 ]

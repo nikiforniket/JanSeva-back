@@ -2,6 +2,7 @@
 
 from django.db import models
 
+
 class NewStatusChoices(models.TextChoices):
 
     CREATED = "created", "Created"

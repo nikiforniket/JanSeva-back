@@ -10,11 +10,29 @@ from location.models.sub_local_bodies import SubLocalBody
 
 class WorkDone(TimestampedMetaModelMixin):
 
-    fund = models.ForeignKey(Allocation, related_name="works_done", on_delete=models.DO_NOTHING, null=True, blank=True)
-    scheme = models.ForeignKey(Scheme, related_name="works_done", on_delete=models.DO_NOTHING, null=True, blank=True)
+    fund = models.ForeignKey(
+        Allocation,
+        related_name="works_done",
+        on_delete=models.DO_NOTHING,
+        null=True,
+        blank=True,
+    )
+    scheme = models.ForeignKey(
+        Scheme,
+        related_name="works_done",
+        on_delete=models.DO_NOTHING,
+        null=True,
+        blank=True,
+    )
     amount = models.PositiveIntegerField(null=True, blank=True)
     description = models.TextField()
-    location = models.ForeignKey(SubLocalBody, related_name="works_done", on_delete=models.DO_NOTHING, null=True, blank=True)
+    location = models.ForeignKey(
+        SubLocalBody,
+        related_name="works_done",
+        on_delete=models.DO_NOTHING,
+        null=True,
+        blank=True,
+    )
     year = models.PositiveIntegerField()
 
     def __str__(self):

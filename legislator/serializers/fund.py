@@ -15,10 +15,10 @@ class FundRegisterSerializer(serializers.ModelSerializer):
 
 class AllocationRegisterSerializer(serializers.ModelSerializer):
 
-        class Meta:
-            model = Allocation
-            fields = "__all__"
-            read_only_fields = ("id",)
+    class Meta:
+        model = Allocation
+        fields = "__all__"
+        read_only_fields = ("id",)
 
 
 class FundListSerializer(serializers.Serializer):
@@ -33,10 +33,10 @@ class FundListSerializer(serializers.Serializer):
 
 class AllocationSerializer(serializers.ModelSerializer):
 
-        class Meta:
-            model = Allocation
-            fields = "__all__"
-            read_only_fields = ("id",)
+    class Meta:
+        model = Allocation
+        fields = "__all__"
+        read_only_fields = ("id",)
 
 
 class FundDetailSerializer(serializers.ModelSerializer):
@@ -61,4 +61,3 @@ class AllocationUpdateSerializer(serializers.ModelSerializer):
         model = Allocation
         fields = ("amount", "month_start", "month_end", "description")
         read_only_fields = ("id",)
-

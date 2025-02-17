@@ -7,10 +7,10 @@ from civic.models import GeoLocationComplaint, GeoLocationComplaintFiles
 
 class GeoLocationComplaintFilesRegisterSerializer(serializers.ModelSerializer):
 
-        class Meta:
-            model = GeoLocationComplaintFiles
-            fields = "__all__"
-            read_only_fields = ("id",)
+    class Meta:
+        model = GeoLocationComplaintFiles
+        fields = "__all__"
+        read_only_fields = ("id",)
 
 
 class GeoLocationComplaintRegisterSerializer(serializers.ModelSerializer):
@@ -46,7 +46,10 @@ class GeolocationComplaintFilesMetaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = GeoLocationComplaintFiles
-        fields = ("id", "file",)
+        fields = (
+            "id",
+            "file",
+        )
 
 
 class GeolocationComplaintDetailSerializer(serializers.ModelSerializer):
