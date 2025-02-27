@@ -12,3 +12,8 @@ class NewsCategory(TimestampedMetaModelMixin):
 
     def __str__(self):
         return f"{self.name} | {self.is_approved}"
+
+    class Meta:
+        verbose_name = "News Category"
+        verbose_name_plural = "News Categories"
+        ordering = ["name"]

@@ -10,7 +10,11 @@ from legislator.views import (
     AllocationDetailView,
     AllocationListView,
     AllocationRegisterView,
+    AllocationSelectView,
     RepresentativeSelectView,
+    WorkDoneRegisterView,
+    WorkDoneListView,
+    WorkDoneDetailView
 )
 
 legislator_urlpatterns = [
@@ -29,8 +33,16 @@ legislator_urlpatterns = [
         name="allocation-detail",
     ),
     path(
+        "allocations/select/",
+        AllocationSelectView.as_view(),
+        name="allocation-select",
+    ),
+    path(
         "representatives/select/",
         RepresentativeSelectView.as_view(),
         name="representative-select",
     ),
+    path("works-done/register/", WorkDoneRegisterView.as_view(), name="work-done-register"),
+    path("works-done/", WorkDoneListView.as_view(), name="work-done-list"),
+    path("works-done/<int:pk>/", WorkDoneDetailView.as_view(), name="works-done-detail")
 ]

@@ -16,6 +16,7 @@ User = get_user_model()
 
 
 class LoginView(APIView):
+    authentication_classes = []
 
     def post(self, request, *args, **kwargs):
         try:

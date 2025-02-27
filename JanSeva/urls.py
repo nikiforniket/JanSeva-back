@@ -24,6 +24,7 @@ from juser.urls import juser_urls
 from civic.urls import civic_urlpatterns
 from legislator.urls import legislator_urlpatterns
 from location.urls import location_urlpatterns
+from news.urls import news_urlpatterns
 
 urlpatterns = (
     [
@@ -34,4 +35,5 @@ urlpatterns = (
     + civic_urlpatterns
     + legislator_urlpatterns
     + location_urlpatterns
+    + news_urlpatterns
 )

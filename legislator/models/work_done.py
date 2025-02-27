@@ -2,7 +2,7 @@
 
 from django.db import models
 
-from civic.models import Scheme
+from civic.models import Scheme, Sector
 from common.models import TimestampedMetaModelMixin
 from legislator.models.fund import Allocation
 from location.models.sub_local_bodies import SubLocalBody
@@ -16,6 +16,11 @@ class WorkDone(TimestampedMetaModelMixin):
         on_delete=models.DO_NOTHING,
         null=True,
         blank=True,
+    )
+    sector = models.ForeignKey(
+        Sector,
+        related_name="works_done",
+        on_delete=models.DO_NOTHING,
     )
     scheme = models.ForeignKey(
         Scheme,

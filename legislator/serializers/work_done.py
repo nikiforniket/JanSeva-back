@@ -15,8 +15,27 @@ class WorkDoneRegisterSerializer(serializers.ModelSerializer):
 
 class WorkDoneListSerializer(serializers.Serializer):
     id = serializers.IntegerField()
-    title = serializers.CharField()
+    fund_year = serializers.IntegerField()
+    fund_month_start = serializers.IntegerField()
+    fund_month_end = serializers.IntegerField()
+    allocated_fund = serializers.IntegerField()
+    location_name = serializers.CharField()
+    location_parent_name = serializers.CharField()
+    location_parent_type = serializers.CharField()
+    scheme_name = serializers.CharField()
+    sector_name = serializers.CharField()
+    scheme = serializers.CharField()
+    amount = serializers.IntegerField()
     description = serializers.CharField()
-    representative_name = serializers.CharField()
+    year = serializers.IntegerField()
     created_at = serializers.DateTimeField()
     updated_at = serializers.DateTimeField()
+
+
+class WorkDoneUpdateSerializer(serializers.ModelSerializer):
+    location_parent = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = WorkDone
+        fields = ("id", "fund", "sector", "scheme", "amount", "location_parent", "location", "description", "year")
+        read_only_fields = ("id",)

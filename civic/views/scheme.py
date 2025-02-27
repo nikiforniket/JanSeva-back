@@ -63,8 +63,13 @@ class SchemeSelectView(generics.ListAPIView):
 
     def filter_queryset(self, queryset):
         search = self.request.query_params.get("search", None)
+        sector = self.request.query_params.get("sector", None)
         if search:
             queryset = queryset.filter(name__icontains=search)
+        if sector:
+            queryset = queryset.filter(sector_id=sector)
+        else:
+            queryset = queryset.none()
         return queryset
 
 

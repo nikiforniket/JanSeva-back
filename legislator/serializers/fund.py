@@ -39,6 +39,18 @@ class AllocationSerializer(serializers.ModelSerializer):
         read_only_fields = ("id",)
 
 
+class AllocationSelectSerializer(serializers.ModelSerializer):
+
+        class Meta:
+            model = Allocation
+            fields = (
+                "id",
+                "amount",
+                "month_start",
+                "month_end",
+            )
+
+
 class FundDetailSerializer(serializers.ModelSerializer):
 
     class Meta:

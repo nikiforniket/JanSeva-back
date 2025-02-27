@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-h24k*q&kig%c+zd5-s(5mx&j=psqpg#$=(dh6(#%+o^a1*jve1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["physically-calm-hermit.ngrok-free.app", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["amazed-gopher-singularly.ngrok-free.app", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -165,4 +165,4 @@ SIMPLE_JWT = {"ACCESS_TOKEN_LIFETIME": timedelta(minutes=1000)}
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-MEDIA_URL = "https://physically-calm-hermit.ngrok-free.app/"
+MEDIA_URL = "https://amazed-gopher-singularly.ngrok-free.app/"

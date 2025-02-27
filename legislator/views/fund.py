@@ -14,6 +14,7 @@ from legislator.serializers import (
     AllocationRegisterSerializer,
     AllocationSerializer,
     AllocationUpdateSerializer,
+    AllocationSelectSerializer,
 )
 
 
@@ -149,3 +150,25 @@ class AllocationDetailView(generics.RetrieveUpdateAPIView):
         if self.request.method in ["PATCH"]:
             return AllocationUpdateSerializer
         return AllocationSerializer
+
+
+class AllocationSelectView(generics.ListAPIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    serializer_class = AllocationSelectSerializer
+
+    def get_queryset(self):
+        return Allocation.objects.filter(is_deleted=False).values(
+            "id",
+            "amount",
+            "month_start",
+            "month_end",
+        )
+
+    def filter_queryset(self, queryset):
+        year = self.request.query_params.get("year", None)
+        if year:
+            queryset = queryset.filter(fund__year=year)
+            return queryset
+        return queryset.none()

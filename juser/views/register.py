@@ -15,9 +15,7 @@ User = get_user_model()
 
 class RegisterUserSerializer(generics.CreateAPIView):
     serializer_class = RegisterUserSerializer
-    permission_classes = [
-        IsAuthenticated,
-    ]
+    authentication_classes = []
 
     def create(self, request, *args, **kwargs):
         try:
